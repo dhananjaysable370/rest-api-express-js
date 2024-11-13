@@ -7,6 +7,7 @@ import router from "./routes/userRoute.js";
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 dotenv.config();
 
 const port = process.env.PORT || 3000;
@@ -23,4 +24,4 @@ dbConnection(MongoUri)
     console.log(error);
   });
 
-app.use("/api/users", router); // This is the route for the user API
+app.use("/api", router); // This is the route for the user API
