@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { dbConnection } from "./lib/db.js";
-import router from "./routes/userRoute.js";
+import userRouter from "./routes/userRoute.js";
 
 const app = express();
 app.use(express.json());
@@ -24,4 +24,4 @@ dbConnection(MongoUri)
     console.log(error);
   });
 
-app.use("/api", router); // This is the route for the user API
+app.use("/api", userRouter); // This is the route for the user API
