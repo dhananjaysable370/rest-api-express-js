@@ -101,3 +101,20 @@ export const updateUser = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error!" });
   }
 };
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) { 
+      return res.status(400).json({ message: "User ID is required" });
+    }
+    const user = await User.findByIdAndDelete(id).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.status(200).json({ message: "User deleted successfully!" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error!" });
+  }
+}
