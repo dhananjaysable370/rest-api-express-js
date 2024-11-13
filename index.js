@@ -23,5 +23,4 @@ dbConnection(MongoUri)
     console.log(error);
   });
 
-
-app.use('/api/users', router);// This is the route for the user API
+app.use("/api/users", router); // This is the route for the user API
