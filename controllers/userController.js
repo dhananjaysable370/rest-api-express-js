@@ -1,5 +1,5 @@
 import { User } from "../models/userModel.js";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 
 export const create = async (req, res) => {
   try {
@@ -26,6 +26,23 @@ export const create = async (req, res) => {
     }
 
     return res.status(201).json({ message: "User created successfully", user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error!" });
+  }
+};
+
+export const getOneUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+    const user = await User.findById(id).select('-password');
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.status(200).json({ user });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error!" });
