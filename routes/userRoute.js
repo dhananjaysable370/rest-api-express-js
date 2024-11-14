@@ -8,7 +8,9 @@ import {
 } from "../controllers/userController.js";
 
 const userRouter = Router();
-
+userRouter.get('/user', (req, res) => {
+    res.render('dashboard.ejs')
+})
 userRouter.get("/allusers", allUsers);
 userRouter.post("/users", create);
 userRouter.get("/user/:id", getOneUser);
