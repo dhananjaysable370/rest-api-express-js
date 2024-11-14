@@ -51,16 +51,28 @@ export const getOneUser = async (req, res) => {
 
 export const allUsers = async (req, res) => {
   try {
-    const users = await User.find({}).select("-password").lean();
-    if (!users || users.length === 0) {
+    const users = await User.find({});
+    if (!users) {
       return res.status(404).json({ message: "No users found" });
     }
-    return res.status(200).json({ users });
+    res.render('allusers', { users }); 
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal Server Error!" });
+    res.status(500).send("Error fetching users");
   }
 };
+
+// export const allUsers = async (req, res) => {
+//   try {
+//     const users = await User.find({}).select("-password").lean().exec();
+//     if (!users || users.length === 0) {
+//       return res.status(404).json({ success: false, message: "No users found" });
+//     }
+//     return res.status(200).json({ success: true, data: users });
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ success: false, message: "Internal Server Error!" });
+//   }
+// };
 
 export const updateUser = async (req, res) => {
   try {
@@ -105,7 +117,7 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
-    if (!id) { 
+    if (!id) {
       return res.status(400).json({ message: "User ID is required" });
     }
     const user = await User.findByIdAndDelete(id).select("-password");
@@ -117,4 +129,4 @@ export const deleteUser = async (req, res) => {
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error!" });
   }
-}
+};
