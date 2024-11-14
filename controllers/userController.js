@@ -43,7 +43,6 @@ export const getOneUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     res.render('dashboard.ejs', { user: user });
-    // res.status(200).json({ message: "user fetched successfully", user })
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error!" });

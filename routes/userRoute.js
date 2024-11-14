@@ -9,7 +9,6 @@ import {
 
 const userRouter = Router();
 
-
 userRouter.get('/allusers', allUsers);
 
 userRouter.post("/users", create);
