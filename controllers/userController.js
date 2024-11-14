@@ -1,5 +1,5 @@
-import { User } from "../models/userModel.js";
 import bcrypt from "bcrypt";
+import { User } from "../models/userModel.js";
 
 export const create = async (req, res) => {
   try {
@@ -42,7 +42,7 @@ export const getOneUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.render('oneuser.ejs', { user:user });
+    res.render('dashboard.ejs', { user: user });
     // res.status(200).json({ message: "user fetched successfully", user })
   } catch (error) {
     console.error(error);

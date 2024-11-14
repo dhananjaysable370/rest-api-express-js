@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>One user page</title>
 </head>
+
 <body>
-    <main>
-        <h1>Dashboard</h1>
-        <p>Welcome to the dashboard</p>
-        <%= title %>
-        <%= user %>
-    </main>
+    <h1>All Users</h1>
+    <ul>
+        <h1>
+            Hello,
+            <%= user.username %>
+        </h1>
+        <h2>
+            <%= user.email %>
+        </h2>
+    </ul>
 </body>
+
 </html>

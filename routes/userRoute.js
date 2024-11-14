@@ -8,9 +8,7 @@ import {
 } from "../controllers/userController.js";
 
 const userRouter = Router();
-userRouter.get("/user", (req, res) => {
-    res.render("dashboard.ejs", { title: "Hello,", user: "Guest" });
-});
+
 
 userRouter.get('/allusers', allUsers);
 
