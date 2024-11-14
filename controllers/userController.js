@@ -51,28 +51,16 @@ export const getOneUser = async (req, res) => {
 
 export const allUsers = async (req, res) => {
   try {
-    const users = await User.find({});
-    if (!users) {
-      return res.status(404).json({ message: "No users found" });
+    const users = await User.find({}).select("-password").lean().exec();
+    if (!users || users.length === 0) {
+      return res.status(404).json({ success: false, message: "No users found" });
     }
-    res.render('allusers', { users }); 
+    return res.status(200).json({ success: true, data: users });
   } catch (error) {
-    res.status(500).send("Error fetching users");
+    console.error(error);
+    return res.status(500).json({ success: false, message: "Internal Server Error!" });
   }
 };
-
-// export const allUsers = async (req, res) => {
-//   try {
-//     const users = await User.find({}).select("-password").lean().exec();
-//     if (!users || users.length === 0) {
-//       return res.status(404).json({ success: false, message: "No users found" });
-//     }
-//     return res.status(200).json({ success: true, data: users });
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({ success: false, message: "Internal Server Error!" });
-//   }
-// };
 
 export const updateUser = async (req, res) => {
   try {
