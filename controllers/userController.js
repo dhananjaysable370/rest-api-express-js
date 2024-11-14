@@ -42,7 +42,8 @@ export const getOneUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    return res.status(200).json({ user });
+    res.render('oneuser.ejs', { user:user });
+    // res.status(200).json({ message: "user fetched successfully", user })
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error!" });
@@ -55,7 +56,7 @@ export const allUsers = async (req, res) => {
     if (!users || users.length === 0) {
       return res.status(404).json({ success: false, message: "No users found" });
     }
-    return res.status(200).json({ success: true, data: users });
+    res.render('allusers.ejs', { users: users });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ success: false, message: "Internal Server Error!" });
