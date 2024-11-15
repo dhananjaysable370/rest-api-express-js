@@ -5,9 +5,9 @@ import { dbConnection } from "./lib/db.js";
 import userRouter from "./routes/userRoute.js";
 
 const app = express();
-app.use(express.json({ limit: '50mb' }));
+app.use(express.json());
 app.use(cors({ origin: '*' }));
-app.use(express.urlencoded({ extended: true, limit: '50mb', parameterLimit: 10000 }));
+app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 dotenv.config({ path: './.env' });
 
