@@ -42,7 +42,7 @@ export const getOneUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.render('dashboard.ejs', { user: user });
+    res.render("dashboard.ejs", { user: user });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error!" });
@@ -53,12 +53,16 @@ export const allUsers = async (req, res) => {
   try {
     const users = await User.find({}).select("-password").lean().exec();
     if (!users || users.length === 0) {
-      return res.status(404).json({ success: false, message: "No users found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "No users found" });
     }
-    res.render('allusers.ejs', { users: users });
+    res.render("allusers.ejs", { users: users });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ success: false, message: "Internal Server Error!" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal Server Error!" });
   }
 };
 
